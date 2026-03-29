@@ -1,0 +1,1724 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>À propos de CodeNaka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        html {
+            font-size: 62.5%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        /* Animation de fond subtile */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .code-particle {
+            position: absolute;
+            color: rgba(42, 157, 143, 0.3);
+            font-family: monospace;
+            font-size: 1.6rem;
+            animation: float 15s linear infinite;
+        }
+
+        .trading-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e9c46a, transparent);
+            animation: moveLine 20s linear infinite;
+        }
+
+        .data-point {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(233, 196, 106, 0.2);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes moveLine {
+            0% { transform: translateX(-100%) translateY(0); }
+            100% { transform: translateX(100vw) translateY(100vh); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 9%;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(42, 157, 143, 0.1);
+        }
+
+        .logo {
+            font-size: 3.2rem;
+            color: #2a9d8f;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.5s ease;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .logo:hover {
+            color: #e9c46a;
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            font-size: 1.8rem;
+            color: #e0e0e0;
+            margin-left: 4rem;
+            font-weight: 500;
+            transition: 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #e9c46a;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2a9d8f, #e9c46a);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2.5rem;
+            color: #e9c46a;
+            cursor: pointer;
+            z-index: 1001;
+            transition: transform 0.3s ease;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        .menu-toggle:hover {
+            transform: rotate(90deg);
+        }
+
+        @media(max-width: 995px) {
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1001;
+            }
+            
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+                margin-top: 0;
+                padding: 1rem 5%;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: linear-gradient(135deg, #161616, #1a1a1a);
+                border-left: 3px solid #2a9d8f;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 10rem;
+                transition: 0.5s ease;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav a {
+                margin: 2rem 0;
+                font-size: 2rem;
+                width: 80%;
+                text-align: center;
+                padding: 1rem;
+                margin-left: 0;
+                border-radius: 8px;
+                background: rgba(42, 157, 143, 0.05);
+            }
+
+            nav a::after {
+                display: none;
+            }
+
+            nav a:hover,
+            nav a.active {
+                background: rgba(42, 157, 143, 0.2);
+                color: #e9c46a;
+                transform: translateY(-3px);
+            }
+        }
+
+        /* CORRECTION : Style commun pour toutes les sections */
+        section {
+            width: 100%;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease;
+            padding: 10rem 9% 5rem;
+            min-height: auto;
+            display: block;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Style pour le contenu de chaque section */
+        .section-content {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: auto;
+        }
+
+        .home-content {
+            flex: 1;
+        }
+
+        .home-content h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .home-content h1 span {
+            color: #e9c46a;
+            position: relative;
+            display: inline-block;
+        }
+
+        .home-content h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #2a9d8f, #e76f51);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .home-content h1 span:hover::after {
+            transform: scaleX(1);
+        }
+
+        .home-content h3 {
+            font-size: 3.2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .typing-text {
+            color: #e76f51;
+            font-weight: 700;
+            display: inline-block;
+            position: relative;
+        }
+
+        .typing-text::after {
+            content: '|';
+            position: relative;
+            right: -8px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .home-content p {
+            font-size: 1.6rem;
+            line-height: 1.6;
+            color: #cccccc;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .home-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .home-img::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #2a9d8f, #e9c46a, #e76f51);
+            animation: rotate 10s linear infinite;
+            opacity: 0.3;
+            filter: blur(20px);
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .home-img img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(42, 157, 143, 0.3);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .home-img img:hover {
+            transform: scale(1.02) rotate(2deg);
+            box-shadow: 0 0 60px rgba(233, 196, 106, 0.5);
+        }
+
+        .section-img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 20px;
+            margin: 3rem auto;
+            box-shadow: 0 0 40px rgba(42, 157, 143, 0.3);
+            display: block;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .section-img:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(233, 196, 106, 0.4);
+        }
+
+        /* CORRECTION : Logos des réseaux sociaux */
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 4.5rem;
+            height: 4.5rem;
+            background-color: transparent;
+            border: 0.2rem solid;
+            font-size: 2rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .social-icons a:hover::before {
+            left: 100%;
+        }
+
+        /* CORRECTION : Changement des logos */
+        .social-icons a.facebook {
+            color: #1877F2;
+            border-color: #1877F2;
+        }
+
+        .social-icons a.instagram {
+            color: #E4405F;
+            border-color: #E4405F;
+        }
+
+        .social-icons a.whatsapp {
+            color: #25D366;
+            border-color: #25D366;
+        }
+
+        .social-icons a:hover {
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .social-icons a.facebook:hover {
+            background-color: #1877F2;
+        }
+
+        .social-icons a.instagram:hover {
+            background-color: #E4405F;
+        }
+
+        .social-icons a.whatsapp:hover {
+            background-color: #25D366;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #2a9d8f, #e9c46a);
+            border-radius: 4rem;
+            font-size: 1.6rem;
+            color: #0a0a0a;
+            letter-spacing: 0.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(233, 196, 106, 0.6);
+        }
+
+        .section-title {
+            font-size: 4.5rem;
+            text-align: center;
+            margin-bottom: 5rem;
+            color: #e9c46a;
+            position: relative;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #2a9d8f, #e9c46a, #e76f51);
+            border-radius: 2px;
+        }
+
+        /* Services */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid rgba(42, 157, 143, 0.1);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            transform-origin: center;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(42, 157, 143, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #e76f51;
+            box-shadow: 0 20px 40px rgba(231, 111, 81, 0.2);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            color: #2a9d8f;
+            margin-bottom: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .service-card h3 {
+            font-size: 2.4rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .service-card p {
+            font-size: 1.5rem;
+            color: #cccccc;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Compétences */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid rgba(42, 157, 143, 0.1);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #e9c46a;
+            box-shadow: 0 15px 30px rgba(233, 196, 106, 0.2);
+        }
+
+        .skill-card h3 {
+            font-size: 2rem;
+            color: #2a9d8f;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            font-size: 1.5rem;
+            color: #cccccc;
+            margin-bottom: 1rem;
+            padding-left: 2.5rem;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-list li:hover {
+            transform: translateX(10px);
+            color: #ffffff;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #e9c46a;
+            font-size: 1.8rem;
+        }
+
+        /* Formation */
+        .timeline {
+            max-width: 800px;
+            margin: 5rem auto;
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #2a9d8f, #e9c46a, #e76f51);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 2px solid rgba(42, 157, 143, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            width: calc(50% - 40px);
+            transform-origin: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-right: auto;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: auto;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #e76f51;
+            border-radius: 50%;
+            top: 20px;
+            right: -52px;
+            box-shadow: 0 0 20px rgba(231, 111, 81, 0.8);
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -52px;
+            background: #f4a261;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            border-color: #e9c46a;
+            box-shadow: 0 15px 30px rgba(233, 196, 106, 0.3);
+        }
+
+        .timeline-item h4 {
+            font-size: 2rem;
+            color: #e9c46a;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-date {
+            font-size: 1.4rem;
+            color: #cccccc;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-date i {
+            color: #e76f51;
+        }
+
+        /* Expérience */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        .experience-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid rgba(42, 157, 143, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            transform-origin: center;
+        }
+
+        .experience-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #2a9d8f, #e9c46a);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .experience-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #e76f51;
+            box-shadow: 0 20px 40px rgba(231, 111, 81, 0.2);
+        }
+
+        .experience-card h3 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .experience-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem 2rem;
+            background: rgba(42, 157, 143, 0.1);
+            border-radius: 10px;
+            min-width: 100px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            transform-origin: center;
+        }
+
+        .stat:hover {
+            transform: translateY(-3px);
+            background: rgba(42, 157, 143, 0.2);
+            border-color: #e9c46a;
+        }
+
+        .stat-value {
+            font-size: 2.4rem;
+            color: #2a9d8f;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-top: 0.5rem;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 5rem;
+            width: 100%;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(15, 15, 15, 0.9));
+            border-radius: 15px;
+            padding: 3rem;
+            border: 2px solid rgba(42, 157, 143, 0.1);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transform-origin: center;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(233, 196, 106, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .contact-card:hover::before {
+            left: 100%;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #e9c46a;
+            box-shadow: 0 20px 40px rgba(233, 196, 106, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 4rem;
+            color: #2a9d8f;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: #e9c46a;
+        }
+
+        .contact-card h3 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            font-size: 1.5rem;
+            color: #cccccc;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2a9d8f, #e9c46a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.4);
+            transform-origin: center;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(233, 196, 106, 0.6);
+        }
+
+        /* Badges pour petites photos */
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #2a9d8f;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-origin: center;
+        }
+
+        .badge:hover {
+            transform: scale(1.1) rotate(10deg);
+            border-color: #e9c46a;
+            box-shadow: 0 10px 20px rgba(233, 196, 106, 0.4);
+        }
+
+        .badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: #e9c46a;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .badge:hover .badge-label {
+            opacity: 1;
+        }
+
+        /* Responsive - CORRECTIONS */
+        @media (max-width: 1200px) {
+            .home {
+                gap: 6rem;
+            }
+            
+            .home-content h1 {
+                font-size: 4rem;
+            }
+            
+            .home-content h3 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .home {
+                flex-direction: column;
+                text-align: center;
+                gap: 4rem;
+                min-height: auto;
+            }
+            
+            .home-content {
+                order: 2;
+            }
+            
+            .home-img {
+                order: 1;
+                margin-bottom: 2rem;
+            }
+            
+            .home-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .home-content h3 {
+                font-size: 2.5rem;
+                justify-content: center;
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 3.5rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+            }
+
+            .timeline-item::before {
+                left: -52px !important;
+                right: auto !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Correction débordement */
+            body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+            
+            header {
+                padding: 1rem 5%;
+            }
+            
+            section {
+                padding: 12rem 5% 3rem;
+                min-height: auto;
+            }
+            
+            .section-content {
+                padding: 0 1rem;
+            }
+            
+            /* Grid en une colonne */
+            .services-container,
+            .skills-container,
+            .experience-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            /* Réduire padding cartes */
+            .service-card,
+            .experience-card,
+            .contact-card {
+                padding: 2rem;
+            }
+            
+            /* Stats en colonne */
+            .experience-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stat {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            /* Images adaptées */
+            .home-img img {
+                max-width: 300px;
+            }
+            
+            .section-img {
+                max-width: 90%;
+                margin: 2rem auto;
+                height: auto;
+            }
+            
+            .badge {
+                width: 60px;
+                height: 60px;
+            }
+            
+            /* Timeline mobile */
+            .timeline::before {
+                left: 20px !important;
+            }
+
+            .timeline-item {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+            }
+
+            .timeline-item::before {
+                left: -42px !important;
+                right: auto !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .home-content h1 {
+                font-size: 3rem;
+            }
+            
+            .home-content h3 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.8rem;
+            }
+            
+            .btn {
+                padding: 1rem 2.5rem;
+                font-size: 1.5rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .badge-container {
+                gap: 1rem;
+            }
+
+            .badge {
+                width: 50px;
+                height: 50px;
+            }
+
+            .section-img {
+                max-width: 100%;
+            }
+            
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .home-content h3 {
+                font-size: 2rem;
+            }
+            
+            .home-content p {
+                font-size: 1.4rem;
+            }
+            
+            .home-img img {
+                max-width: 250px;
+            }
+            
+            .menu-toggle {
+                top: 15px;
+                right: 15px;
+            }
+        }
+
+        /* Correction spécifique pour très petits écrans */
+        @media (max-width: 360px) {
+            .home-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .home-content h3 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.4rem;
+            }
+            
+            nav a {
+                font-size: 1.6rem;
+                margin-left: 2rem;
+            }
+            
+            .badge {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .menu-toggle {
+                top: 10px;
+                right: 10px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Fix pour les problèmes de z-index */
+        .service-card, .experience-card, .contact-card, .skill-card, .stat {
+            z-index: 1;
+        }
+        
+        .service-card:hover, .experience-card:hover, .contact-card:hover, .skill-card:hover, .stat:hover {
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animation de fond subtile -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+    
+    <header>
+        <a href="#home" class="logo">CodeNaka</a>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav id="navMenu">
+            <a href="#home" class="active">Accueil</a>
+            <a href="#services">Services</a>
+            <a href="#competences">Compétences</a>
+            <a href="#formation">Formation</a>
+            <a href="#experience">Expérience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="section-content">
+            <div class="home">
+                <div class="home-content">
+                    <h1><span>Bonjour,</span><br>Nous somme <span>CodeNaka,</span></h1>
+                    <h3>votre <span class="typing-text" id="typingText"></span></h3>
+                    <p>Développeur web et mobile, nous créons des applications sur mesure pour concrétiser vos projets digitaux. Notre expertise technique nous permet de transformer vos idées en solutions fonctionnelles et performantes. Parallèlement, CodeNaka pratique le trading avec une approche stratégique que nous partageons en tant que formateur.</p>
+                    <div class="social-icons">
+                        <!-- CORRECTION : Logos changés -->
+                        <a href="https://web.facebook.com/codenaka10?locale=fr_FR" class="facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/hendrinirina/" class="instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/261387753496" class="whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <a href="#contact" class="btn">Contactez-nous</a>
+                </div>
+                <div class="home-img">
+                    <img src="main.jpg" alt="Hendri - Développeur et Trader">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-content">
+            <h2 class="section-title">Nos services</h2>
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Développement Web" class="section-img">
+            <div class="badge-container">
+                <div class="badge">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcyVcxmw8bLvds2zbbLLnZu3altTMWukw9QA&s" alt="Code">
+                    <div class="badge-label">Code</div>
+                </div>
+                <div class="badge">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7EzlrtsKIoJosTnk8a0EBF2KodeRBr2JKpQ&s" alt="Mobile">
+                    <div class="badge-label">Mobile</div>
+                </div>
+                <div class="badge">
+                    <img src="https://i.pinimg.com/736x/d5/07/75/d507757a410be4188e9905aa90c5878b.jpg" alt="Web">
+                    <div class="badge-label">Web</div>
+                </div>
+            </div>
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Développement Web/Mobile <p>(Full stack)</p></h3>
+                    <p>Création d'applications sur mesure, sites vitrines, e-commerce et solutions mobiles avec les technologies les plus récentes.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Solutions Fintech</h3>
+                    <p>Plateformes de trading, dashboards analytiques et outils de gestion financière pour optimiser vos opérations.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Formation & Coaching</h3>
+                    <p>Cours personnalisés de trading, mentorat et workshops pour maîtriser les marchés financiers et la technologie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Compétences Section -->
+    <section id="competences">
+        <div class="section-content">
+            <h2 class="section-title">Nos compétences</h2>
+            <img src="https://globalbanking.ac.uk/media/v1uf31d5/hero-image-1.webp" 
+                 alt="Trading Analytics" class="section-img">
+            <div class="badge-container">
+                <div class="badge">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZULgn7jR5IH6sCNm5PjEnH1xTaSLFJLmx8w&s" alt="React">
+                    <div class="badge-label">React</div>
+                </div>
+                <div class="badge">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLB1Gd7R9nti8BoqOc86Jj4zzrh5MGChrmJw&s" alt="Node.js">
+                    <div class="badge-label">Node.js</div>
+                </div>
+                <div class="badge">
+                    <img src="https://pocketoption.com/blog/wp-content/uploads/2025/04/1742026030961-373490650-3.webp" alt="Trading">
+                    <div class="badge-label">Trading</div>
+                </div>
+            </div>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <h3><i class="fas fa-laptop-code"></i> Technologies</h3>
+                    <ul class="skill-list">
+                        <li>Notepad++</li>
+                        <li>Node.js </li>
+                        <li>React Native</li>
+                        <li>MySQL & Firebase & Supabase</li>
+                        <li>HTML5/CSS3/JavaScript</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card">
+                    <h3><i class="fas fa-chart-line"></i> Trading</h3>
+                    <ul class="skill-list">
+                        <li>Analyse Technique</li>
+                        <li>Gestion du Risque</li>
+                        <li>Stratégies de Trading <strong>(HLZ, IOF, Session EU/US)</strong></li>
+                        <li>Analyse Fondamentale</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-card">
+                    <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                    <ul class="skill-list">
+                        <li>Pédagogie</li>
+                        <li>Communication</li>
+                        <li>Gestion de Projet</li>
+                        <li>Résolution de Problèmes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Formation Section -->
+    <section id="formation">
+        <div class="section-content">
+            <h2 class="section-title">Notre parcours</h2>
+            <div class="badge-container">
+                <div class="badge">
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Diplôme">
+                    <div class="badge-label">Diplôme</div>
+                </div>
+                <div class="badge">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Certification">
+                    <div class="badge-label">Certification</div>
+                </div>
+                <div class="badge">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Apprentissage">
+                    <div class="badge-label">Apprentissage</div>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Diplôme en informatique</h4>
+                    <div class="timeline-date">
+                        <i class="far fa-calendar"></i> 2023 - 2025
+                    </div>
+                    <p>Spécialisation en développement web et mobile avec projet de plateforme de trading automatisé.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Certification trading</h4>
+                    <div class="timeline-date">
+                        <i class="far fa-calendar"></i> 2022
+                    </div>
+                    <p>Formation intensive en analyse technique, gestion du risque et psychologie du trading. Certificat en tant que trader propfirm <strong>(Ryze funding, Fundednext)</strong></p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>Auto-formation continue</h4>
+                    <div class="timeline-date">
+                        <i class="far fa-calendar"></i> En continu
+                    </div>
+                    <p>Apprentissage constant des nouvelles technologies et participation à des projets innovants.  Intégration d'outils d'IA générative pour la production de contenus et l'aide à la décision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Expérience Section -->
+    <section id="experience">
+        <div class="section-content">
+            <h2 class="section-title">Nos expériences</h2>
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Expérience professionnelle" class="section-img">
+            <div class="badge-container">
+                <div class="badge">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Projets">
+                    <div class="badge-label">Projets</div>
+                </div>
+                <div class="badge">
+                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Trading">
+                    <div class="badge-label">Trading</div>
+                </div>
+                <div class="badge">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Formation">
+                    <div class="badge-label">Formation</div>
+                </div>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <h3><i class="fas fa-briefcase"></i> Développement Freelance</h3>
+                    <p>Réalisation de projets web et mobiles pour divers clients avec une satisfaction client de 98%.</p>
+                    <div class="experience-stats">
+                        <div class="stat">
+                            <div class="stat-value">12+</div>
+                            <div class="stat-label">Projets</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experience-card">
+                    <h3><i class="fas fa-chart-pie"></i> Performance en tant que trader</h3>
+                    <p>Trading régulier avec développement de stratégies personnalisées et analyse de marché.</p>
+                    <div class="experience-stats">
+                        <div class="stat">
+                            <div class="stat-value">4x à 5x</div>
+                            <div class="stat-label">Par semaine</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">+15%</div>
+                            <div class="stat-label">Rendement</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experience-card">
+                    <h3><i class="fas fa-users"></i> Formation en Trading</h3>
+                    <p>Partage d'expertise et formation de nouveaux traders avec approche pédagogique personnalisée.</p>
+                    <div class="experience-stats">
+                        <div class="stat">
+                            <div class="stat-value">70+</div>
+                            <div class="stat-label">Étudiants</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">94%</div>
+                            <div class="stat-label">Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-content">
+            <h2 class="section-title">Contactez-nous</h2>
+            <div class="badge-container">
+                <div class="badge">
+                    <img src="data:image/jpeg;base64,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" alt="WhatsApp">
+                    <div class="badge-label">WhatsApp</div>
+                </div>
+                <div class="badge">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHj1tvPOe_AuRZKh-5Q8dX6EAICWM6Ve8sJw&s" alt="Email">
+                    <div class="badge-label">Email</div>
+                </div>
+                <div class="badge">
+                    <img src="data:image/jpeg;base64,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" alt="Réseaux">
+                    <div class="badge-label">Réseaux</div>
+                </div>
+            </div>
+            <div class="contact-grid">
+                <a href="https://wa.me/261387753496" target="_blank" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp Direct</h3>
+                    <p>Réponse rapide dans la journée</p>
+                </a>
+                
+                <a href="mailto:hendriinirina@gmail.com" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <h3>Email Professionnel</h3>
+                    <p>hendriinirina@gmail.com</p>
+                </a>
+                
+                <a href="https://web.facebook.com/codenaka10?locale=fr_FR" target="_blank" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <h3>Réseaux Sociaux</h3>
+                    <p>Profil professionnel</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Animation de fond subtile
+        const backgroundAnimation = document.getElementById('backgroundAnimation');
+        const professions = ["développeur Web", "trader", "formateur en trading", "expert Fintech"];
+        let currentProfession = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        // Créer des particules de fond
+        function createBackgroundParticles() {
+            // Code particles
+            for(let i = 0; i < 20; i++) {
+                const codeParticle = document.createElement('div');
+                codeParticle.className = 'code-particle';
+                codeParticle.textContent = ['{', '}', '<', '>', '(', ')', ';', '=', '+', '-', '*', '/', '[', ']'][Math.floor(Math.random() * 14)];
+                codeParticle.style.left = Math.random() * 100 + 'vw';
+                codeParticle.style.animationDelay = Math.random() * 15 + 's';
+                codeParticle.style.fontSize = (Math.random() * 1 + 1.2) + 'rem';
+                backgroundAnimation.appendChild(codeParticle);
+            }
+
+            // Trading lines
+            for(let i = 0; i < 5; i++) {
+                const line = document.createElement('div');
+                line.className = 'trading-line';
+                line.style.top = Math.random() * 100 + 'vh';
+                line.style.width = Math.random() * 100 + 100 + 'px';
+                line.style.animationDelay = Math.random() * 20 + 's';
+                backgroundAnimation.appendChild(line);
+            }
+
+            // Data points
+            for(let i = 0; i < 30; i++) {
+                const point = document.createElement('div');
+                point.className = 'data-point';
+                point.style.left = Math.random() * 100 + 'vw';
+                point.style.top = Math.random() * 100 + 'vh';
+                point.style.animationDelay = Math.random() * 3 + 's';
+                backgroundAnimation.appendChild(point);
+            }
+        }
+
+        // Texte typing animation
+        function typeWriter() {
+            const typingText = document.getElementById('typingText');
+            const currentText = professions[currentProfession];
+            
+            if (!isDeleting && charIndex < currentText.length) {
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            } else if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 2000);
+            } else if (isDeleting && charIndex > 0) {
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(typeWriter, 50);
+            } else {
+                isDeleting = false;
+                currentProfession = (currentProfession + 1) % professions.length;
+                setTimeout(typeWriter, 500);
+            }
+        }
+
+        // Menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Fermer le menu en cliquant sur un lien
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Navigation smooth
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if(link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if(targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Observer pour les animations de sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        // Observer toutes les sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Bouton retour en haut
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 500) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+            
+            // Navigation active
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if(window.scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // CORRECTION : Fix pour les bugs d'animation
+        document.querySelectorAll('.service-card, .experience-card, .contact-card, .skill-card, .stat').forEach(card => {
+            // Reset z-index pour éviter les bugs
+            card.style.zIndex = '1';
+            
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Initialisation
+        window.addEventListener('DOMContentLoaded', () => {
+            createBackgroundParticles();
+            typeWriter();
+            
+            // Précharger les images
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.5s ease';
+                
+                if(img.complete) {
+                    img.style.opacity = '1';
+                } else {
+                    img.addEventListener('load', function() {
+                        this.style.opacity = '1';
+                    });
+                    img.addEventListener('error', function() {
+                        console.warn('Image failed to load:', this.src);
+                        this.style.opacity = '1';
+                    });
+                }
+            });
+            
+            // Activer la première section
+            document.querySelector('#home').classList.add('active');
+        });
+    </script>
+</body>
+</html>
